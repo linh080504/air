@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Data - Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container d-flex">
+        <!-- Thanh điều hướng -->
+        <nav class="sidebar bg-dark text-white p-3" style="width: 250px;">
+            <h2 class="text-center mb-4">Dashboard</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Air Quality</a></li>
+                <!-- Thêm class `collapsed` và data-toggle Collapse vào Reports -->
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-toggle="collapse" data-target="#reports" aria-expanded="false" aria-controls="reports">
+                        Reports
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Nội dung chính -->
+        <div class="main-content p-4 flex-grow-1">
+            <!-- Tiêu đề của trang -->
+            <header class="mb-4">
+                <h1>Air Quality Data</h1>
+            </header>
+
+            <!-- Các thông số hiển thị theo dạng các thẻ -->
+            <div class="data-container row mb-4">
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>PM2.5</h2>
+                            <p class="display-4">{{ data.field1 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>PM10</h2>
+                            <p class="display-4">{{ data.field2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>Temperature</h2>
+                            <p class="display-4">{{ data.field3 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>Humidity</h2>
+                            <p class="display-4">{{ data.field4 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>CO</h2>
+                            <p class="display-4">{{ data.field5 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="data-box card shadow-sm">
+                        <div class="card-body text-center">
+                            <h2>Smoke</h2>
+                            <p class="display-4">{{ data.field6 }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Các biểu đồ hiển thị trong phần Reports (Ẩn khi chưa click) -->
+            <div class="collapse" id="reports">
+                <div class="charts row">
+                    {% for chart in charts %}
+                    <div class="col-md-6 mb-4">
+                        <div class="chart card shadow-sm">
+                            <div class="card-body">
+                                <img src="data:image/png;base64,{{ chart }}" alt="Chart" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
